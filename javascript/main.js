@@ -4,8 +4,8 @@ console.log("main.js");
 const startButtonNode = document.querySelector("#start-btn");
 const startScreenNode = document.querySelector("#start-screen");
 const gameScreenNOde = document.querySelector("#game-screen");
-const gameBoxNode = document.querySelector("#game-box")
-
+const gameBoxNode = document.querySelector("#game-box");
+const gameOverScreenNode = document.querySelector("#gameover-screen")
 let gameObject = null;
 
 // STATE MANAGEMENT FUNCTIONS
@@ -19,21 +19,11 @@ function startGame() {
   gameObject = new Game();
 
   gameObject.gameLoop();
-
 }
 
 // ADD EVENT LISTENERS
 startButtonNode.addEventListener("click", startGame);
 
-gameBoxNode.addEventListener("keydown", (event) => {
-
-    if (event.key === "ArrowLeft"  ) {
-        gameObject.spaceShipHero.spaceShipHeroMovementEffect(event.key )
-    
-    } else if (event.key === "ArrowRight" ) {
-        paddleX+= 20
-    }
-
-    
-    
-})
+window.addEventListener("keydown", (event) => {
+  gameObject.spaceShipHero.spaceShipHeroMovementEffect(event.key);
+});

@@ -13,38 +13,37 @@ class SpaceShipHero {
     this.x = 190;
     this.y = 525;
     this.w = 120;
+    this.h = 120;
 
-     // ajuste de tamaño y posicion de mi nave Hero
 
+    this.health = 1;
 
-     this.node.style.width = `${this.w}px`
+    // ajuste de tamaño y posicion de mi nave Hero
 
-     this.node.style.position = "absolute";
-     this.node.style.top = `${this.y}px`
-     this.node.style.left = `${this.x}px`
+    this.node.style.width = `${this.w}px`;
+
+    this.node.style.position = "absolute";
+    this.node.style.top = `${this.y}px`;
+    this.node.style.left = `${this.x}px`;
   }
 
   // las funciones de mi nave hero
 
   spaceShipHeroMovementEffect = (event) => {
+    if (event === "ArrowLeft") {
+      this.x -= 20;
+      this.positionUpdate()
 
-    if (event === "ArrowLeft"  ) {
-        this.x -= 20
-        this.node.style.left = `${this.x}px`
-        console.log("izquierda")
-  
-    
-    } else if (event.key === "ArrowRight" ) {
-        this.x+= 20
-        this.node.style.left = `${this.x}px`
-        console.log("derecha")
-  }
-    
-    
-        
-    
+    } else if (event === "ArrowRight") {
+      this.x += 20;
+      this.positionUpdate()
 
+    }
+  };
 
+  positionUpdate = () => {
+
+    this.node.style.left = `${this.x}px`;
   }
 
 
