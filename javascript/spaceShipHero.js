@@ -5,15 +5,15 @@ class SpaceShipHero {
     //DOM
     this.node = document.createElement("img");
     this.node.src =
-      "./Animated_Pixel_Ships_v1.5.6/Plane 01/Normal/planes_01A_spin-1.png";
+      "./Animated_Pixel_Ships_v1.5.6/Plane 01/Normal/Hero-ship-centrada.png";
     gameBoxNode.append(this.node);
 
     // las propiedades de mi nave hero
 
     this.x = 190;
     this.y = 525;
-    this.w = 120;
-    this.h = 120;
+    this.w = 42;
+    this.h = 71;
 
 
     this.health = 1;

@@ -12,9 +12,9 @@ class Asteroid {
 
     this.y = -32;
     this.w = 32;
-    this.h =32;
+    this.h = 32;
 
-    this.gravitySpeed = 1;
+    this.gravitySpeed = 2;
 
     this.node.style.width = `${this.w}px`;
 
