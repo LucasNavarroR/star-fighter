@@ -8,18 +8,18 @@ const gameBoxNode = document.querySelector("#game-box");
 const gameOverScreenNode = document.querySelector("#gameover-screen")
 const playAgainButtonNode = document.querySelector("#playAgain-btn")
 const playAgainGameOverButton = document.querySelector("#playAgain-gamOver-btn")
-gameObject = null;
+ let gameObject = null;
 
 // STATE MANAGEMENT FUNCTIONS
 
 function startGame() {
   console.log("game started");
 
- delete gameObject
-
+ 
+ 
   
   
-
+ gameOverScreenNode.style.display = "none";
   startScreenNode.style.display = "none";
   gameScreenNOde.style.display = "flex";
 
@@ -28,7 +28,13 @@ function startGame() {
   gameObject.gameLoop();
 }
 
+//console.log(typeof gameBoxNode)
 function restartGame() {
+
+
+
+gameBoxNode.innerHTML = " "
+  
   startScreenNode.style.display = "flex"
   gameScreenNOde.style.display = "none";
 
@@ -40,11 +46,20 @@ function restartGame() {
 // ADD EVENT LISTENERS
 startButtonNode.addEventListener("click", startGame);
 playAgainButtonNode.addEventListener("click", restartGame);
-playAgainGameOverButton.addEventListener("click", startGame);
+playAgainGameOverButton.addEventListener("click", restartGame);
 
 
 
 
 window.addEventListener("keydown", (event) => {
+  
+  if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
+  
   gameObject.spaceShipHero.spaceShipHeroMovementEffect(event.key);
+  } else if (event.key === " ") {
+
+    gameObject.spaceShipHero.spaceShipHeroFire(event.key);
+  }
+
+
 });

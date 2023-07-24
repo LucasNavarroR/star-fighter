@@ -7,23 +7,23 @@ class Game {
     //aqui creo mi nave Hero
     this.spaceShipHero = new SpaceShipHero();
     this.asteroidArr = [];
-    this.villanArr = []
+    this.villanArr = [];
     this.isGameOn = true;
     this.planetArr = [];
     this.frames = 0;
+
+    this.heroFireArr = [];
   }
 
   gameOver = () => {
     this.isGameOn = false; //detiene la recursion
     gameScreenNOde.style.display = "none"; //quita la pantalla de juego
     gameOverScreenNode.style.display = "flex";
-    
-
   };
 
-spaceShipVillanApeaar = () => {
-if(this.frames > 600 && this.frames % 250 === 0) {
-  let randomPositionX = Math.floor(Math.random() * 450);
+  spaceShipVillanApeaar = () => {
+    if (this.frames > 600 && this.frames % 250 === 0) {
+      let randomPositionX = Math.floor(Math.random() * 450);
 
       let newVillan = new SpaceShipVillan(randomPositionX);
 
@@ -40,7 +40,6 @@ if(this.frames > 600 && this.frames % 250 === 0) {
       this.asteroidArr.push(newAsteroid);
     }
   };
-
 
   collisionSpaceShipHerospaceShipVillan = () => {
     //el pollito => this.pollito
@@ -74,6 +73,23 @@ if(this.frames > 600 && this.frames % 250 === 0) {
     });
   };
 
+  collisionSpaceShipHeroFireAsteroids = () => {
+    this.heroFireArr.forEach((cadaFuego) => {
+      this.asteroidArr.forEach((cadaAsteroide) => {
+        if (
+          this.cadaFuego.x < cadaAsteroide.x + cadaAsteroide.w &&
+          this.cadaFuego.x + this.cadaFuego.w > cadaAsteroide.x &&
+          this.cadaFuego.y < cadaAsteroide.y + cadaAsteroide.h &&
+          this.cadaFuego.y + this.cadaFuego.h > cadaAsteroide.y
+        ) {
+          this.gameOver();
+        }
+      });
+
+      // Collision detected!
+    });
+  };
+
   asteroidDisapear = () => {
     // si el primer elemento del array ha salido de la vista removemos el primer elemento del array
     if (this.asteroidArr[0].y > 732) {
@@ -97,23 +113,19 @@ if(this.frames > 600 && this.frames % 250 === 0) {
       this.planetArr.push(planet);
     }
     if (this.planetArr.length === 1) {
-    
-      this.planetArr[0].planetDestinyMovementEffect()
-      }
+      this.planetArr[0].planetDestinyMovementEffect();
+    }
     if (this.planetArr.length === 1 && this.planetArr[0].y === 150) {
       this.isGameOn = false;
       playAgainButtonNode.style.display = "flex";
-      
     }
-
-    
   };
 
   // funciones de mi juego
 
   gameLoop = () => {
     this.frames++;
-  
+
     this.asteroidApear();
     this.asteroidDisapear();
 
@@ -128,11 +140,16 @@ if(this.frames > 600 && this.frames % 250 === 0) {
       cadaAsteroide.asteroidMovement();
     });
 
+    this.heroFireArr.forEach((cadaFuego) => {
+      cadaFuego.fuegoSpaceShipHeroMovement();
+    });
+
     this.collisionSpaceShipHerospaceShipVillan();
     this.collisionSpaceShipHeroAsteroids();
+    this.collisionSpaceShipHeroFireAsteroids();
 
     this.winTheGame();
-    
+
     if (this.isGameOn === true) {
       requestAnimationFrame(this.gameLoop);
     }

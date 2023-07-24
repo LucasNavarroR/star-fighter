@@ -15,8 +15,29 @@ class SpaceShipHero {
     this.w = 42;
     this.h = 71;
 
+ this.health = 1;
 
-    this.health = 1;
+
+ // propiedades de proyectiles
+  //this.fire = document.createElement("img")
+  //this.fire.src = "./Animated_Pixel_Ships_v1.5.6/Projectiles/laser_basico.png"
+
+  //gameBoxNode.append(this.fire)
+
+  // this.fire._x = 190;
+  // this.fire._y = 525;
+  // this.fire._w = 8;
+  // this.fire._h = 26;
+
+    //ajustes tamaño y posicion de los proyectiles
+
+    //  this.fire.style.width = `${this.fire._w}px`;
+
+    //  this.fire.style.position = "absolute";
+    //  this.fire.style.top = `${this.fire._y}px`;
+    // this.fire.style.left = `${this.x}px`;
+  
+
 
     // ajuste de tamaño y posicion de mi nave Hero
 
@@ -44,7 +65,20 @@ class SpaceShipHero {
   positionUpdate = () => {
 
     this.node.style.left = `${this.x}px`;
+    
   }
 
 
+
+spaceShipHeroFire = (event) => {
+
+  if (event === " ") {
+
+let heroFire = new FuegoSpaceShipHero(this.x)
+
+ gameObject.heroFireArr.push(heroFire)
+  }
+
 }
+}
+
