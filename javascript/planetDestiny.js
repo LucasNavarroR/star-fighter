@@ -8,8 +8,8 @@ class PlanetDestiny {
 
     //las propiedades de PlanetDestiny
     this.y = -480;
-    this.w = 500;
-    this.x = 0;
+    this.w = 379;
+    this.x = 60;
 
     this.gravitySpeed = 0.5;
 

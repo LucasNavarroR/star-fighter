@@ -49,13 +49,17 @@ class SpaceShipHero {
   }
 
   // las funciones de mi nave hero
+  spaceShipHeroPosition = (event) => {
+
+  }
 
   spaceShipHeroMovementEffect = (event) => {
-    if (event === "ArrowLeft") {
+    if (event === "ArrowLeft" && this.x > 0 && gameObject.isGameOn === true) {
+      // this.node.src = "./Animated_Pixel_Ships_v1.5.6/Plane 01/Normal/Hero-sip-izquierda.png"
       this.x -= 20;
       this.positionUpdate()
 
-    } else if (event === "ArrowRight") {
+    } else if (event === "ArrowRight" && this.x < 458 && gameObject.isGameOn === true) {
       this.x += 20;
       this.positionUpdate()
 
@@ -65,7 +69,12 @@ class SpaceShipHero {
   positionUpdate = () => {
 
     this.node.style.left = `${this.x}px`;
-    
+    if (this.x >= 458) {
+      this.x = 458
+    } else if (this.x <= 0) {
+      this.x = 0
+    }
+    this.node.style.left = `${this.x}px`;
   }
 
 
