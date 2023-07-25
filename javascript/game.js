@@ -12,6 +12,7 @@ class Game {
     this.planetArr = [];
     this.frames = 0;
 
+    this.villanFireArr = [];
     this.heroFireArr = [];
 
     this.villanModelArr = [
@@ -22,7 +23,7 @@ class Game {
         skin: "./Animated_Pixel_Ships_v1.5.6/Plane 05/Villano1.png",
         width: 50,
         height: 69,
-        
+        fire: " "
       },
       {
         villan: "villan2",
@@ -31,11 +32,17 @@ class Game {
         skin: "./Animated_Pixel_Ships_v1.5.6/Plane 03/Villano2.png",
         width: 60,
         height: 77,
-
-      }
+        fire: "./Animated_Pixel_Ships_v1.5.6/Projectiles/bolas-laser-villan.png",
+      },
     ];
+    this.villanId = 0;
   }
 
+  HeroHealth = () => {
+    if (this.spaceShipHero.health < 1) {
+      this.gameOver()
+    }
+  }
   gameOver = () => {
     this.isGameOn = false; //detiene la recursion
     gameScreenNOde.style.display = "none"; //quita la pantalla de juego
@@ -45,14 +52,16 @@ class Game {
   spaceShipVillanApeaar = () => {
     if (this.frames > 600 && this.frames % 250 === 0) {
       let randomPositionX = Math.floor(Math.random() * 450);
-      
+
       let model = Math.floor(Math.random() * this.villanModelArr.length);
+
       let name = this.villanModelArr[model].villan;
       let skin = this.villanModelArr[model].skin;
       let height = this.villanModelArr[model].height;
       let velocity = this.villanModelArr[model].velocity;
       let width = this.villanModelArr[model].width;
-      let health = this.villanModelArr[model].life
+      let health = this.villanModelArr[model].life;
+      let fire = this.villanModelArr[model].fire;
 
       let newVillan = new SpaceShipVillan(
         name,
@@ -61,10 +70,14 @@ class Game {
         skin,
         height,
         width,
-        velocity
+        velocity,
+        this.villanId,
+        fire
       );
 
       this.villanArr.push(newVillan);
+
+      this.villanId++;
     }
   };
 
@@ -123,14 +136,12 @@ class Game {
         ) {
           // Collision detected!
           this.asteroidArr[b].health -= this.heroFireArr[a].damage;
-          this.heroFireArr[a].node.remove()
+          this.heroFireArr[a].node.remove();
           this.heroFireArr.splice(a, 1);
-          
         }
       });
     });
   };
-
 
   collisionSpaceShipHeroFireVillanos = () => {
     this.heroFireArr.forEach((cadaFuego, a) => {
@@ -143,13 +154,32 @@ class Game {
         ) {
           // Collision detected!
           this.villanArr[b].health -= this.heroFireArr[a].damage;
-          this.heroFireArr[a].node.remove()
+          this.heroFireArr[a].node.remove();
           this.heroFireArr.splice(a, 1);
-          
         }
       });
     });
   };
+
+  collisionSpaceShipVillanFireHeroShip = () => {
+    //el pollito => this.pollito
+    this.villanFireArr.forEach((cadaFuego,i) => {
+      if (
+        this.spaceShipHero.x < cadaFuego.x + cadaFuego.w &&
+        this.spaceShipHero.x + this.spaceShipHero.w > cadaFuego.x &&
+        this.spaceShipHero.y < cadaFuego.y + cadaFuego.h &&
+        this.spaceShipHero.y + this.spaceShipHero.h > cadaFuego.y
+      ) {
+        // Collision detected!
+
+        this.spaceShipHero.health -= cadaFuego.damage
+        this.villanFireArr[i].node.remove()
+        this.villanFireArr.splice(i,1)
+      }
+    });
+  };
+  
+
 
   asteroidDisapear = () => {
     // si el primer elemento del array ha salido de la vista removemos el primer elemento del array
@@ -168,6 +198,31 @@ class Game {
       } else if (asteroid.y > 732) {
         this.asteroidArr[0].node.remove();
         this.asteroidArr.shift();
+      }
+    });
+  };
+
+  laserDisapear = () => {
+    this.heroFireArr.forEach((cadaFuego) => {
+      if (cadaFuego.y <= -26) {
+        this.heroFireArr[0].node.remove();
+        this.heroFireArr.shift();
+      }
+    });
+
+    this.villanFireArr.forEach((cadaFuego, i) => {
+      if (cadaFuego.y >= 700) {
+        this.villanFireArr[0].node.remove();
+        this.villanFireArr.shift();
+      } else if (
+        this.villanArr.forEach((villan) => {
+          
+          villan.id === cadaFuego.id && villan.explosion === true;
+        })
+      ) {
+        console.log("entro")
+        this.villanFireArr[i].node.remove();
+        this.villanFireArr.splice(i, 1);
       }
     });
   };
@@ -211,10 +266,9 @@ class Game {
         }, 1000);
       } else if (villan.y > 780) {
         this.villanArr[i].node.remove();
-        this.villanArr.splice(i,1);
+        this.villanArr.splice(i, 1);
       }
     });
-  
   };
 
   winTheGame = () => {
@@ -237,16 +291,19 @@ class Game {
   gameLoop = () => {
     this.frames++;
 
-    
     this.asteroidApear();
     this.asteroidDisapear();
     //this.cleaningAsteroids();
+
+    this.laserDisapear();
 
     this.spaceShipVillanApeaar();
     this.spaceShipVillanDisapear();
 
     this.villanArr.forEach((cadaVillano) => {
       cadaVillano.villanShipMovement();
+
+      if (this.frames % 120 === 0) cadaVillano.spaceShipVillanFire();
     });
 
     this.asteroidArr.forEach((cadaAsteroide) => {
@@ -257,11 +314,17 @@ class Game {
       cadaFuego.fuegoSpaceShipHeroMovement();
     });
 
+    this.villanFireArr.forEach((cadaFuego) => {
+      cadaFuego.fuegoSpaceShipVillanMovement();
+    });
+
     this.collisionSpaceShipHerospaceShipVillan();
     this.collisionSpaceShipHeroAsteroids();
     this.collisionSpaceShipHeroFireAsteroids();
-    this.collisionSpaceShipHeroFireVillanos()
+    this.collisionSpaceShipHeroFireVillanos();
+    this.collisionSpaceShipVillanFireHeroShip()
 
+    this.HeroHealth()
     this.winTheGame();
 
     if (this.isGameOn === true) {

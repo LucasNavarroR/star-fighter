@@ -1,7 +1,17 @@
 console.log("spaceShip villan.js");
 
 class SpaceShipVillan {
-  constructor(name, health, randomPositionX, skin, height, width, velocity) {
+  constructor(
+    name,
+    health,
+    randomPositionX,
+    skin,
+    height,
+    width,
+    velocity,
+    id,
+    fire
+  ) {
     this.node = document.createElement("img");
 
     this.node.src = skin;
@@ -9,10 +19,11 @@ class SpaceShipVillan {
 
     // las propiedades de SpaceShipVillan
     this.name = name;
-    console.log(this.name);
+    this.id = id;
     this.health = health;
     this.x = randomPositionX;
     this.explosion = false;
+    this.fire = fire;
 
     this.y = height * -1;
     this.w = width;
@@ -45,5 +56,38 @@ class SpaceShipVillan {
     }
     this.node.style.top = `${this.y}px`;
     this.node.style.left = `${this.x}px`;
+  };
+
+  spaceShipVillanFire = () => {
+    if (name === "villan1") {
+      return
+    } else if (name !== "villan1" && this.explosion === false) {
+      
+        let direction1 = "center";
+        let direction2 = "left";
+        let direction3 = "right";
+
+        let newVillanFire1 = new FuegoSpaceShipVillan(
+          this.x,
+          this.fire,
+          direction1
+        );
+        let newVillanFire2 = new FuegoSpaceShipVillan(
+          this.x,
+          this.fire,
+          direction2
+        );
+        let newVillanFire3 = new FuegoSpaceShipVillan(
+          this.x,
+          this.fire,
+          direction3
+        );
+        gameObject.villanFireArr.push(
+          newVillanFire1,
+          newVillanFire2,
+          newVillanFire3
+        );
+      
+    }
   };
 }

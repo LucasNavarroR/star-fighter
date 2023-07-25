@@ -15,7 +15,7 @@ class SpaceShipHero {
     this.w = 42;
     this.h = 71;
 
- this.health = 1;
+ this.health = 3;
 
 
  // propiedades de proyectiles
