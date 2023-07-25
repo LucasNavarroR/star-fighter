@@ -50,7 +50,7 @@ class SpaceShipVillan {
     this.node.style.top = `${this.y}px`;
     this.node.style.left = `${this.x}px`;
     if (this.name === "villan2" && this.y >= 100) {
-      console.log("hey");
+    
       this.y = 100;
     } else {
     }
@@ -59,9 +59,8 @@ class SpaceShipVillan {
   };
 
   spaceShipVillanFire = () => {
-    if (name === "villan1") {
-      return
-    } else if (name !== "villan1" && this.explosion === false) {
+
+   if (this.name !== "villan1" && this.explosion === false) {
       
         let direction1 = "center";
         let direction2 = "left";

@@ -24,7 +24,7 @@ class FuegoSpaceShipVillan {
   }
 
   fuegoSpaceShipVillanMovement = () => {
-    this.y += 3;
+    this.y += 2;
     if (this.direction === "left") {
       this.x -= 0.35;
     } else if (this.direction === "right") {
