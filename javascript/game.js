@@ -47,9 +47,37 @@ class Game {
 
   HeroShield = () => {
     if (this.frames % 240 === 0) {
-      this.spaceShipHero.shieldCount ++ 
-  }
-}
+      this.spaceShipHero.shieldCount++;
+    }
+  };
+
+  // MisileExplosion = () => {
+  //   this.heroFireArr.forEach((cadaMisil, i) => {
+  //      console.log(cadaMisil)
+  //       //console.log("misil quieto");
+
+  //       if ( cadaMisil === "FuegoSpaceShipMissile"
+  //        && cadaMisil.explosionActive === false ) {
+
+  //       cadaMisil.node.src =
+  //         "./Animated_Pixel_Ships_v1.5.6/Explosion/Large/explosion-grande.gif";
+  //         cadaMisil.explosionActive = true;
+
+  //       //console.log(cadaMisil.explode)
+  //       setTimeout(() => {
+  //         this.heroFireArr[i].node.remove();
+  //         this.heroFireArr.splice(i, 1);f
+  //       }, 1000);
+  //     } else if ( cadaMisil === "heroFireMisile"
+  //     && cadaMisil.explosionActive === false ) {
+  //       cadaMisil.y = 100
+  //     }
+  //     // if ( cadaMisil.explosionActive = true) {
+  //     //   cadaMisil.y = 100
+  //     // }
+
+  //   });
+  // };
 
   // heroMovement = () => {
   //   document.addEventListener("keydown", (event) => {
@@ -170,7 +198,7 @@ class Game {
         this.villanArr.splice(i, 1);
 
         this.spaceShipHero.health -= 1;
-        console.log("colison nave")
+        console.log("colison nave");
       }
     });
   };
@@ -188,7 +216,7 @@ class Game {
         this.asteroidArr[i].node.remove();
         this.asteroidArr.splice(i, 1);
         this.spaceShipHero.health -= 1;
-        console.log("colion asteroid")
+        console.log("colion asteroid");
       }
     });
   };
@@ -206,7 +234,7 @@ class Game {
           this.asteroidArr[b].health -= this.heroFireArr[a].damage;
           this.heroFireArr[a].node.remove();
           this.heroFireArr.splice(a, 1);
-          console.log("colision")
+          console.log("colision");
         }
       });
     });
@@ -222,10 +250,11 @@ class Game {
           cadaFuego.y + cadaFuego.h > cadaVillano.y
         ) {
           // Collision detected!
+
           this.villanArr[b].health -= this.heroFireArr[a].damage;
           this.heroFireArr[a].node.remove();
           this.heroFireArr.splice(a, 1);
-          console.log("colision")
+          console.log("colision");
         }
       });
     });
@@ -245,7 +274,7 @@ class Game {
         this.spaceShipHero.health -= cadaFuego.damage;
         this.villanFireArr[i].node.remove();
         this.villanFireArr.splice(i, 1);
-        console.log("colison")
+        console.log("colison");
       }
     });
   };
@@ -385,8 +414,10 @@ class Game {
     this.collisionSpaceShipVillanFireHeroShip();
 
     // ----------- OTROS----------
-    this.HeroShield()
-    this.spaceShipHero.spaceShipHeroShield()
+    // this.MisileExplosion();
+
+    this.HeroShield();
+    this.spaceShipHero.spaceShipHeroShield();
     this.HeroHealth();
     this.winTheGame();
 

@@ -5,7 +5,7 @@ class SpaceShipHero {
     //DOM
     this.node = document.createElement("img");
     this.node.src =
-      "./Animated_Pixel_Ships_v1.5.6/Plane 01/Normal/Hero-ship-centrada.png";
+      "./Animated_Pixel_Ships_v1.5.6/Plane 01/Normal/Hero-normal.gif";
     gameBoxNode.append(this.node);
 
     // las propiedades de mi nave hero
@@ -19,6 +19,8 @@ class SpaceShipHero {
 
     this.movingRight = false;
     this.movingLeft = false;
+
+   
 
     this.heroShield = false;
     this.shieldCount = 0;
@@ -53,10 +55,17 @@ class SpaceShipHero {
 
   // las funciones de mi nave hero
   spaceShipHeroPosition = () => {
-    if (this.movingLeft === true) {
+    if (this.movingLeft === false && this.movingRight === false) {
+      this.node.src =
+        "./Animated_Pixel_Ships_v1.5.6/Plane 01/Normal/Hero-normal.gif";
+    } else if (this.movingLeft === true) {
+      this.node.src =
+        "./Animated_Pixel_Ships_v1.5.6/Plane 01/Normal/Hero-left.gif";
       this.x -= 5;
       this.positionUpdate();
     } else if (this.movingRight === true) {
+      this.node.src =
+        "./Animated_Pixel_Ships_v1.5.6/Plane 01/Normal/Hero-right.gif";
       this.x += 5;
       this.positionUpdate();
     }
@@ -86,32 +95,38 @@ class SpaceShipHero {
   };
 
   spaceShipHeroShield = () => {
-    
-   
     if (this.heroShield === true && this.shieldCount >= 5) {
-      console.log("hero shield")
-this.health += 3
+      console.log("hero shield");
+      this.health += 3;
       this.node.src =
         "/Animated_Pixel_Ships_v1.5.6/Plane 01/Normal/Hero-ship-centrada-shield-on.png";
 
       this.node.style.width = `${96}px`;
 
       this.node.style.height = `${96}px`;
-     
+
       setTimeout(() => {
         this.shieldCount = 0;
         this.heroShield = false;
         this.node.style.width = `${this.w}px`;
 
         this.node.style.height = `${this.h}px`;
-        this.node.src = "./Animated_Pixel_Ships_v1.5.6/Plane 01/Normal/Hero-ship-centrada.png"
+        this.node.src =
+          "./Animated_Pixel_Ships_v1.5.6/Plane 01/Normal/Hero-ship-centrada.png";
       }, 3000);
     }
   };
 
-  spaceShipHeroFire = () => {
+  spaceShipHeroFire = (event) => {
+    if (event === " ") {
     let heroFire = new FuegoSpaceShipHero(this.x);
 
     gameObject.heroFireArr.push(heroFire);
+
+    } else if (event === "f") {
+      console.log("F")
+      let heroFireMisile = new FuegoSpaceShipMissile(this.x+20)
+      gameObject.heroFireArr.push(heroFireMisile)
+    }
   };
 }

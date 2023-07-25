@@ -1,22 +1,23 @@
-console.log("fuegoSpaceShipHero.js");
+console.log("fueoMissilHero.js");
 
-class FuegoSpaceShipHero {
+class FuegoSpaceShipMissile {
 
   constructor(position) {
 
   this.node = document.createElement("img")
-  this.node.src = "./Animated_Pixel_Ships_v1.5.6/Projectiles/laser_basico.png"
+  this.node.src = "./Animated_Pixel_Ships_v1.5.6/Projectiles/Misil-Hero.gif"
 
  
   gameBoxNode.append(this.node)
 
   this.x = position;
   this.y = 525;
-  this.w = 8;
-  this.h = 26;
-  this.explode = false;
+  this.w = 14;
+  this.h = 29;
+  this.explode = true;
   this.explosionActive = false;
-  this.damage = 1;
+
+  this.damage = 3;
 
   this.node.style.width = `${this.w}px`;
 
@@ -26,11 +27,13 @@ class FuegoSpaceShipHero {
   }
 
   fuegoSpaceShipHeroMovement = () => {
-    this.y -= 8;
+    this.y -= 2;
     this.fuegoSpaceShipPositionUpdate();
   };
 
   fuegoSpaceShipPositionUpdate = () => {
     this.node.style.top = `${this.y}px`;
   };
+
+ 
 }

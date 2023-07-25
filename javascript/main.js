@@ -46,8 +46,8 @@ window.addEventListener("keydown", (event) => {
     gameObject.spaceShipHero.movingLeft = true;
   } else if (event.key === "ArrowRight") {
     gameObject.spaceShipHero.movingRight = true;
-  } else if (event.key === " ") {
-    gameObject.spaceShipHero.spaceShipHeroFire();
+  } else if (event.key === " " || event.key === "f") {
+    gameObject.spaceShipHero.spaceShipHeroFire(event.key);
   } else if (event.key === "s") {
    // console.log("shield") 
     gameObject.spaceShipHero.heroShield = true;
@@ -64,5 +64,6 @@ window.addEventListener("keyup", (event) => {
     
      gameObject.spaceShipHero.heroShield = false;
      console.log(gameObject.spaceShipHero.heroShield)
+     
 }}
 );
