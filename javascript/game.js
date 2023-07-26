@@ -8,7 +8,7 @@ class Game {
     this.heroHealthCount = null,
     this.shieldIcon = null;
 this.MisileIcon = null;
-
+this.bsoSOundVar = false
 this.myScore = 0;
 
     this.asteroidArr = [];
@@ -43,12 +43,23 @@ this.myScore = 0;
     ];
     this.villanId = 0;
   }
+  // ------ BSO----
+    // ------ BSO----
+    bsoSound = () => {
+      if(this.bsoSOundVar === false )
+      bsoGameSoundNode.play()
+      this.bsoSOundVar = true
+      setTimeout (()=> {
+        this.bsoSOundVar = false
+      },17000)
+    }
+  
 
   //------------------------------FUNCIONES HERO-----------------------------------
 
   HeroHealth = () => {
 
-
+   
     if (this.spaceShipHero.health < 1) {
       this.gameOver();
     }
@@ -82,6 +93,7 @@ this.myScore = 0;
         cadaMisil.h = 250;
         cadaMisil.explosionActive = true;
 
+bigExplosionSoundNode.play()
         setTimeout(() => {
           this.heroFireMissil[i].node.remove();
           this.heroFireMissil.splice(i, 1);
@@ -218,6 +230,7 @@ scoreNode.innerText = this.myScore
         this.villanArr.splice(i, 1);
 
         this.spaceShipHero.health -= 1;
+        
         //console.log("colison nave");
       }
     });
@@ -233,9 +246,11 @@ scoreNode.innerText = this.myScore
       ) {
         // Collision detected!
         cadaAsteroide.health = 0;
+        miniExplosionSoundNode.play();
         this.asteroidArr[i].node.remove();
         this.asteroidArr.splice(i, 1);
         this.spaceShipHero.health -= 1;
+        hitHeroDamageSoundNode.play()
       }
     });
   };
@@ -252,6 +267,7 @@ scoreNode.innerText = this.myScore
           // Collision detected!
           this.asteroidArr[b].health -= this.heroFireArr[a].damage;
           this.heroFireArr[a].node.remove();
+          miniExplosionSoundNode.play();
           this.heroFireArr.splice(a, 1);
           if (cadaAsteroide.explosion !== true) {this.myScore += 100;}
           console.log("colision");
@@ -400,6 +416,7 @@ scoreNode.innerText = this.myScore
         // Collision detected!
 
         this.spaceShipHero.health -= cadaFuego.damage;
+        hitHeroDamageSoundNode.play()
         this.villanFireArr[i].node.remove();
         this.villanFireArr.splice(i, 1);
         //console.log("colison");
@@ -417,10 +434,11 @@ scoreNode.innerText = this.myScore
         asteroid.node.src =
           "./Animated_Pixel_Ships_v1.5.6/Explosion/Small/explosion-pequeña.gif";
         asteroid.explosion = true;
+        miniExplosionSoundNode.play();
         setTimeout(() => {
           this.asteroidArr[i].node.remove();
           this.asteroidArr.splice(i, 1);
-        }, 800);
+        }, 700);
       } else if (asteroid.y > 732) {
         this.asteroidArr[0].node.remove();
         this.asteroidArr.shift();
@@ -485,10 +503,11 @@ scoreNode.innerText = this.myScore
         villan.node.src =
           "./Animated_Pixel_Ships_v1.5.6/Explosion/Small/explosion-pequeña.gif";
         villan.explosion = true;
+        miniExplosionSoundNode.play();
         setTimeout(() => {
           this.villanArr[i].node.remove();
           this.villanArr.splice(i, 1);
-        }, 800);
+        }, 700);
       } else if (villan.y > 780) {
         this.villanArr[i].node.remove();
         this.villanArr.splice(i, 1);
@@ -557,6 +576,7 @@ scoreNode.innerText = this.myScore
     this.collisionSpaceShipHerospaceShipVillan();
     
     // ----------- OTROS----------
+    this.bsoSound()
 this.score()
 
     this.MisileExplosion();

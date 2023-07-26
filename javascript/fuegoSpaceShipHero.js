@@ -17,7 +17,7 @@ class FuegoSpaceShipHero {
   this.explode = false;
   this.explosionActive = false;
   this.damage = 1;
-
+  this.audio = false;
   this.node.style.width = `${this.w}px`;
 
     this.node.style.position = "absolute";
@@ -26,6 +26,11 @@ class FuegoSpaceShipHero {
   }
 
   fuegoSpaceShipHeroMovement = () => {
+    if (this.audio === false) {
+      laserHeroSoundNode.play();
+      this.audio = true
+
+    }
     this.y -= 8;
     this.fuegoSpaceShipPositionUpdate();
   };

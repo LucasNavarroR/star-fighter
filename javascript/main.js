@@ -8,8 +8,16 @@ const gameBoxNode = document.querySelector("#game-box");
 const gameOverScreenNode = document.querySelector("#gameover-screen");
 const playAgainButtonNode = document.querySelector("#playAgain-btn");
 const playAgainGameOverButton = document.querySelector(
-  "#playAgain-gamOver-btn"
-);
+  "#playAgain-gamOver-btn");
+
+  // VARIABLES DE AUDIO
+const laserHeroSoundNode = document.querySelector("#laserHero");
+const miniExplosionSoundNode = document.querySelector("#miniExplosion");
+const bigExplosionSoundNode = document.querySelector("#bigExplosion");
+const launchRocketSoundNode = document.querySelector("#rocket-launch")
+const hitHeroDamageSoundNode = document.querySelector("#hit-hero")
+const bsoGameSoundNode = document.querySelector("#bso-sound")
+
 let scoreNode = document.querySelector("#score")
 let gameObject = null;
 

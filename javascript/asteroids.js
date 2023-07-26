@@ -5,7 +5,7 @@ class Asteroid {
     this.node = document.createElement("img");
     this.node.src = "./Animated_Pixel_Ships_v1.5.6/Background/asteroid_01.png";
 
-    this.explosion = false;
+   
     this.randomMovementX = Math.floor(Math.random() * 100);
 
     gameBoxNode.append(this.node);
@@ -14,13 +14,14 @@ class Asteroid {
     this.health = 1;
 
     this.x = randomPositionX;
-
+    
     this.y = -32;
     this.w = 32;
     this.h = 32;
 
     this.gravitySpeedY = 2;
     this.gravitySpeedX = 0.3;
+    this.explosion = false;
 
     this.node.style.width = `${this.w}px`;
 

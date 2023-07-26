@@ -54,7 +54,7 @@ body {
   position: relative; /* esto hace que los elementos se posicionen con respecto a la game box */
   user-select: none;
 
-  background-image: url("./Animated_Pixel_Ships_v1.5.6/Background/not_tiled_space_BG.png");
+  background-image: url("./Animated_Pixel_Ships_v1.5.6/Background/Fondo-in-game.gif");
   background-position: center;
   background-size: cover;
 }
@@ -64,4 +64,17 @@ body {
 #game-screen, #gameover-screen {
 
     display: none;
+}
+
+/* ------AUDIOS -----------*/
+
+#laserHero {
+  display: none;
+
+}
+#miniExplosion {
+  display: none;
+}
+#bigExplosion {
+  display: none;
 }
