@@ -34,6 +34,7 @@ function restartGame() {
   gameScreenNOde.style.display = "none";
 
   startGame();
+  playAgainButtonNode.style.display = "none"
 }
 
 // ADD EVENT LISTENERS
@@ -49,9 +50,9 @@ window.addEventListener("keydown", (event) => {
   } else if (event.key === " " || event.key === "f") {
     gameObject.spaceShipHero.spaceShipHeroFire(event.key);
   } else if (event.key === "s") {
-   // console.log("shield") 
+   
     gameObject.spaceShipHero.heroShield = true;
-    console.log(gameObject.spaceShipHero.heroShield)
+   
   }
 });
 

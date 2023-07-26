@@ -21,8 +21,8 @@ class FuegoSpaceShipMissile {
 
   this.node.style.width = `${this.w}px`;
 
-    this.node.style.position = "absolute";
-    this.node.style.top = `${this.y}px`;
+  this.node.style.position = "absolute";
+  this.node.style.top = `${this.y}px`;
   this.node.style.left =  `${this.x}px`;
   }
 
@@ -33,6 +33,8 @@ class FuegoSpaceShipMissile {
 
   fuegoSpaceShipPositionUpdate = () => {
     this.node.style.top = `${this.y}px`;
+    this.node.style.width = `${this.w}px`;
+    this.node.style.left =  `${this.x}px`;
   };
 
  
