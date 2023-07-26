@@ -6,6 +6,9 @@ class Game {
 
     this.spaceShipHero = new SpaceShipHero();
     this.heroHealthCount = null,
+    this.shieldIcon = null;
+this.MisileIcon = null;
+
     this.asteroidArr = [];
     this.villanArr = [];
     this.isGameOn = true;
@@ -52,7 +55,7 @@ class Game {
   HeroShieldAndMisileCount = () => {
     if (this.heroShieldArr.length === 1) {
       this.heroShieldArr[0].posicionShield(this.spaceShipHero.x);
-    }
+    } 
 
     if (this.frames % 240 === 0) {
       this.spaceShipHero.shieldCount++;
@@ -133,7 +136,7 @@ class Game {
   };
 
   winTheGame = () => {
-    if (this.frames === 1200) {
+    if (this.frames === 7200) {
       let planet = new PlanetDestiny();
 
       this.planetArr.push(planet);
@@ -363,6 +366,7 @@ class Game {
           // Collision detected!
           if (cadaMisil.explosionActive === true) {
             this.asteroidArr[b].health -= this.heroFireMissil[a].damage;
+
           } else {
           }
         }
@@ -402,7 +406,7 @@ class Game {
         setTimeout(() => {
           this.asteroidArr[i].node.remove();
           this.asteroidArr.splice(i, 1);
-        }, 1000);
+        }, 800);
       } else if (asteroid.y > 732) {
         this.asteroidArr[0].node.remove();
         this.asteroidArr.shift();
@@ -427,7 +431,7 @@ class Game {
           villan.id === cadaFuego.id && villan.explosion === true;
         })
       ) {
-        console.log("entro");
+        //console.log("entro");
         this.villanFireArr[i].node.remove();
         this.villanFireArr.splice(i, 1);
       }
@@ -470,7 +474,7 @@ class Game {
         setTimeout(() => {
           this.villanArr[i].node.remove();
           this.villanArr.splice(i, 1);
-        }, 1000);
+        }, 800);
       } else if (villan.y > 780) {
         this.villanArr[i].node.remove();
         this.villanArr.splice(i, 1);
@@ -536,7 +540,9 @@ class Game {
     // ----------- OTROS----------
     this.MisileExplosion();
    this.spaceShipHero.HeroimgControl()
+
     this.HeroShieldAndMisileCount();
+    this.spaceShipHero.heroMisileIcon()
     this.spaceShipHero.spaceShipHeroShield();
     this.spaceShipHero.spaceShipHeroHealth()
     this.HeroHealth();

@@ -7,7 +7,6 @@ class SpaceShipHero {
     this.node.src =
       "./Animated_Pixel_Ships_v1.5.6/Plane 01/Normal/Hero-normal.gif";
 
-
     gameBoxNode.append(this.node);
 
     // las propiedades de mi nave hero
@@ -20,7 +19,7 @@ class SpaceShipHero {
     this.health = 3;
 
     this.movingRight = false;
-   
+
     this.movingLeft = false;
 
     this.imgLeft = false;
@@ -28,6 +27,7 @@ class SpaceShipHero {
     this.imgForward = true;
 
     this.heroShield = false;
+    this.heroShieldImg = false;
     this.shieldCount = 0;
 
     this.misileCount = 0;
@@ -62,49 +62,47 @@ class SpaceShipHero {
 
   // las funciones de mi nave hero
 
-spaceShipHeroHealth = () => {
-  if (gameObject.heroHealthCount === null) {
-
-  gameObject.heroHealthCount = new HealthCount
-  }
-}
+  spaceShipHeroHealth = () => {
+    if (gameObject.heroHealthCount === null) {
+      gameObject.heroHealthCount = new HealthCount();
+    }
+  };
 
   spaceShipHeroPosition = () => {
     if (this.movingLeft === false && this.movingRight === false) {
-      this.imgForward = true
-      this.imgLeft = false
-      this.imgRight = false
+      this.imgForward = true;
+      this.imgLeft = false;
+      this.imgRight = false;
     } else if (this.movingLeft === true) {
-      this.imgRight = false
-      this.imgForward = false
-     this.x -= 5;
+      this.imgRight = false;
+      this.imgForward = false;
+      this.x -= 5;
       this.positionUpdate();
     } else if (this.movingRight === true) {
-      this.imgleft = false
-      this.imgForward = false
-      
+      this.imgleft = false;
+      this.imgForward = false;
+
       this.x += 5;
       this.positionUpdate();
     }
   };
 
   HeroimgControl = () => {
-
-    if ( this.movingLeft === true &&  this.imgLeft  === false) {
-    this.node.src =
-        "./Animated_Pixel_Ships_v1.5.6/Plane 01/Normal/Hero-left.gif"
-        this.imgLeft = true
-  } else if (this.movingRight === true && this.imgRight  === false) {
-    this.node.src =
-    "./Animated_Pixel_Ships_v1.5.6/Plane 01/Normal/Hero-right.gif";
-    this.imgRight = true
-   } 
-  // else   {
-  //   this.node.src =
-  //     "./Animated_Pixel_Ships_v1.5.6/Plane 01/Normal/Hero-normal.gif";
-  //     this.imgForward = false
-  // }
-}
+    if (this.movingLeft === true && this.imgLeft === false) {
+      this.node.src =
+        "./Animated_Pixel_Ships_v1.5.6/Plane 01/Normal/Hero-left.gif";
+      this.imgLeft = true;
+    } else if (this.movingRight === true && this.imgRight === false) {
+      this.node.src =
+        "./Animated_Pixel_Ships_v1.5.6/Plane 01/Normal/Hero-right.gif";
+      this.imgRight = true;
+    }
+    // else   {
+    //   this.node.src =
+    //     "./Animated_Pixel_Ships_v1.5.6/Plane 01/Normal/Hero-normal.gif";
+    //     this.imgForward = false
+    // }
+  };
 
   // spaceShipHeroMovementEffect = (event) => {
   //   if (event === "ArrowLeft" && this.x > 0 && gameObject.isGameOn === true) {
@@ -129,22 +127,48 @@ spaceShipHeroHealth = () => {
     this.node.style.left = `${this.x}px`;
   };
 
-  spaceShipHeroShield = () => {
-    if (
-      this.heroShield === true &&
-      this.shieldCount >= 5 &&
-      gameObject.heroShieldArr.length === 0
-    ) {
-      let heroShield = new HeroShield(this.x);
-      gameObject.heroShieldArr.push(heroShield);
-      gameObject.heroShieldArr[0].posicionShield(this.x);
 
-      setTimeout(() => {
-        this.shieldCount = 0;
-        this.heroShield = false;
-        gameObject.heroShieldArr[0].node.remove()
-        gameObject.heroShieldArr.shift()
-      }, 3000);
+  heroMisileIcon = () => {
+    if (gameObject.MisileIcon === null) {
+      gameObject.MisileIcon = new HeroMisileImgHud();
+      gameObject.MisileIcon.node.style.display = "none";
+  } else {
+
+    if (this.misileCount >= 10) {
+      gameObject.MisileIcon.node.style.display = "flex";
+    } else {
+      gameObject.MisileIcon.node.style.display = "none";
+    }
+  }
+}
+  
+  spaceShipHeroShield = () => {
+    if (gameObject.shieldIcon === null) {
+      gameObject.shieldIcon = new HeroShieldImgHud();
+      gameObject.shieldIcon.node.style.display = "none";
+    } else {
+      if (this.shieldCount >= 5) {
+        console.log("shield activated");
+        gameObject.shieldIcon.node.style.display = "flex";
+
+        if (this.heroShield === true && gameObject.heroShieldArr.length === 0) {
+          
+
+          let heroShield = new HeroShield(this.x);
+          this.shieldCount = 0;
+          gameObject.heroShieldArr.push(heroShield);
+          gameObject.heroShieldArr[0].posicionShield(this.x);
+
+          setTimeout(() => {
+            this.shieldCount = 0;
+            this.heroShield = false;
+            gameObject.heroShieldArr[0].node.remove();
+            gameObject.heroShieldArr.shift();
+          }, 4000);
+        }
+      } else {
+        gameObject.shieldIcon.node.style.display = "none";
+      }
     }
   };
 
@@ -154,10 +178,9 @@ spaceShipHeroHealth = () => {
 
       gameObject.heroFireArr.push(heroFire);
     } else if (event === "f" && this.misileCount >= 10) {
-      
       let heroFireMisile = new FuegoSpaceShipMissile(this.x + 20);
       gameObject.heroFireMissil.push(heroFireMisile);
-      this.misileCount = 0
+      this.misileCount = 0;
     }
   };
 }

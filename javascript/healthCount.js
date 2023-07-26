@@ -8,7 +8,7 @@ class HealthCount {
     this.x = 25;
     this.y = 650;
     this.w = 100;
-    this.h = 
+    this.h = 35 
 
     this.node.style.width = `${this.w}px`;
 
