@@ -1,4 +1,4 @@
-console.log("main.js");
+//console.log("main.js");
 
 // GLOBAL VARIABLES
 const startButtonNode = document.querySelector("#start-btn");
@@ -10,6 +10,7 @@ const playAgainButtonNode = document.querySelector("#playAgain-btn");
 const playAgainGameOverButton = document.querySelector(
   "#playAgain-gamOver-btn"
 );
+let scoreNode = document.querySelector("#score")
 let gameObject = null;
 
 // STATE MANAGEMENT FUNCTIONS

@@ -1,4 +1,4 @@
-console.log("game.js");
+//console.log("game.js");
 
 class Game {
   constructor() {
@@ -8,6 +8,8 @@ class Game {
     this.heroHealthCount = null,
     this.shieldIcon = null;
 this.MisileIcon = null;
+
+this.myScore = 0;
 
     this.asteroidArr = [];
     this.villanArr = [];
@@ -135,6 +137,11 @@ this.MisileIcon = null;
     gameOverScreenNode.style.display = "flex";
   };
 
+  score = () => {
+
+scoreNode.innerText = this.myScore
+
+  }
   winTheGame = () => {
     if (this.frames === 7200) {
       let planet = new PlanetDestiny();
@@ -205,13 +212,13 @@ this.MisileIcon = null;
         this.spaceShipHero.y + this.spaceShipHero.h > cadaVillano.y
       ) {
         // Collision detected!
-        cadaVillano.health = 0;
+        cadaVillano.health -= 1;
 
         this.villanArr[i].node.remove();
         this.villanArr.splice(i, 1);
 
         this.spaceShipHero.health -= 1;
-        console.log("colison nave");
+        //console.log("colison nave");
       }
     });
   };
@@ -246,6 +253,7 @@ this.MisileIcon = null;
           this.asteroidArr[b].health -= this.heroFireArr[a].damage;
           this.heroFireArr[a].node.remove();
           this.heroFireArr.splice(a, 1);
+          if (cadaAsteroide.explosion !== true) {this.myScore += 100;}
           console.log("colision");
         }
       });
@@ -264,6 +272,9 @@ this.MisileIcon = null;
           ) {
             // Collision detected!
             this.asteroidArr[b].health -= this.heroShieldArr[a].damage;
+            this.asteroidArr[b].node.remove();
+          this.asteroidArr.splice(a, 1);
+            
             //console.log("colision asteroid shield")
           }
         });
@@ -286,6 +297,7 @@ this.MisileIcon = null;
 
           this.villanArr[i].node.remove();
           this.villanArr.splice(i, 1);
+          
           console.log("colision villan shield")
         }
       });
@@ -327,6 +339,7 @@ this.MisileIcon = null;
           // Collision detected!
 
           this.villanArr[b].health -= this.heroFireArr[a].damage;
+          if (this.villanArr[b].health <= 0) { this.myScore += 1000}
           this.heroFireArr[a].node.remove();
           this.heroFireArr.splice(a, 1);
           console.log("colision");
@@ -347,6 +360,7 @@ this.MisileIcon = null;
           // Collision detected!
           if (cadaMisil.explosionActive === true) {
             this.villanArr[b].health -= this.heroFireMissil[a].damage;
+            if( this.villanArr[b].health <= 0 && cadaVillano.explosion !== true ) { this.myScore += 1000}
           } else {
           }
         }
@@ -366,7 +380,7 @@ this.MisileIcon = null;
           // Collision detected!
           if (cadaMisil.explosionActive === true) {
             this.asteroidArr[b].health -= this.heroFireMissil[a].damage;
-
+            if( this.asteroidArr[b].health <= 0 && cadaAsteroid.explosion !== true) { this.myScore += 100}
           } else {
           }
         }
@@ -485,7 +499,8 @@ this.MisileIcon = null;
   // funciones de mi juego
 
   gameLoop = () => {
-    console.log(this.spaceShipHero.health);
+    console.log(this.myScore)
+    //console.log(this.spaceShipHero.health);
     //console.log(this.spaceShipHero.shieldCount)
 
     this.frames++;
@@ -525,19 +540,25 @@ this.MisileIcon = null;
     });
 
     // ------------------ colisiones -----------------------------
+    this.collisionShieldVillan()
+    this.collisionShieldAsteroids()
+    this.collisionShieldFireVillan()
 
-    this.collisionSpaceShipHerospaceShipVillan();
-    this.collisionSpaceShipHeroAsteroids();
+
+    
+    
     this.collisionSpaceShipHeroFireAsteroids();
     this.collisionSpaceShipHeroFireVillanos();
     this.collisionSpaceShipVillanFireHeroShip();
     this.collisionSpaceShipHeroFireMisilVillanos();
     this.collisionSpaceShipHeroFireMisilAsteroid();
-    this.collisionShieldVillan()
-    this.collisionShieldAsteroids()
-    this.collisionShieldFireVillan()
 
+    this.collisionSpaceShipHeroAsteroids();
+    this.collisionSpaceShipHerospaceShipVillan();
+    
     // ----------- OTROS----------
+this.score()
+
     this.MisileExplosion();
    this.spaceShipHero.HeroimgControl()
 

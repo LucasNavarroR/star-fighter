@@ -1,4 +1,4 @@
-console.log("spaceHip hero.js");
+//console.log("spaceHip hero.js");
 
 class SpaceShipHero {
   constructor() {
