@@ -91,10 +91,12 @@ class SpaceShipHero {
     if (this.movingLeft === true && this.imgLeft === false) {
       this.node.src =
         "./Animated_Pixel_Ships_v1.5.6/Plane 01/Normal/Hero-left.gif";
+        this.h = 71;
       this.imgLeft = true;
     } else if (this.movingRight === true && this.imgRight === false) {
       this.node.src =
         "./Animated_Pixel_Ships_v1.5.6/Plane 01/Normal/Hero-right.gif";
+        this.h = 71;
       this.imgRight = true;
     }
     // else   {
