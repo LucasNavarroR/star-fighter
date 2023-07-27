@@ -5,7 +5,7 @@ class HeroShield {
   constructor(position) {
 
   this.node = document.createElement("img")
-  this.node.src = "./Animated_Pixel_Ships_v1.5.6/Plane 01/Normal/Hero-Shield.gif"
+  this.node.src = "./Animated_Pixel_Ships_v1.5.6/Plane 01/Normal/Hero-shield.gif"
 
  
   gameBoxNode.append(this.node)
