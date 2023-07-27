@@ -1,7 +1,7 @@
 class HeroMisileImgHud {
     constructor() {
       this.node = document.createElement("img");
-      this.node.src = "Animated_Pixel_Ships_v1.5.6/Projectiles/Misil-Hero.gif"
+      this.node.src = "Animated_Pixel_Ships_v1.5.6/Projectiles/misil-hero.gif"
   
       gameBoxNode.append(this.node);
   
