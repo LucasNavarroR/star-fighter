@@ -12,8 +12,8 @@ class HeroShield {
 
   this.x = position;
   this.y = 500;
-  this.w = 110;
-  this.h = 110;
+  this.w = 120;
+  this.h = 120;
 
   this.damage = 1;
 

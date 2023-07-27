@@ -32,6 +32,7 @@ let gameObject = null;
 // STATE MANAGEMENT FUNCTIONS
 
 function startGame() {
+
   console.log("game started");
 
   gameOverScreenNode.style.display = "none";
@@ -46,8 +47,9 @@ function startGame() {
 //console.log(typeof gameBoxNode)
 function restartGame() {
   gameBoxNode.innerHTML = " ";
+  gameObject.bsoSOundVar = false;
 
-  startScreenNode.style.display = "flex";
+ 
   gameScreenNOde.style.display = "none";
 
   startGame();
@@ -64,9 +66,9 @@ window.addEventListener("keydown", (event) => {
     gameObject.spaceShipHero.movingLeft = true;
   } else if (event.key === "ArrowRight") {
     gameObject.spaceShipHero.movingRight = true;
-  } else if (event.key === " " || event.key === "f") {
+  } else if (event.key === " " || event.key === "f" || event.key === "F") {
     gameObject.spaceShipHero.spaceShipHeroFire(event.key);
-  } else if (event.key === "s") {
+  } else if (event.key === "s" || event.key === "S") {
    
     gameObject.spaceShipHero.heroShield = true;
    
@@ -78,7 +80,7 @@ window.addEventListener("keyup", (event) => {
     gameObject.spaceShipHero.movingLeft = false;
   } else if (event.key === "ArrowRight") {
     gameObject.spaceShipHero.movingRight = false;
-  }  else if (event.key === "s") {
+  }  else if (event.key === "s" || event.key === "S") {
     
      gameObject.spaceShipHero.heroShield = false;
      console.log(gameObject.spaceShipHero.heroShield)

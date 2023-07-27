@@ -5,7 +5,7 @@ class HeroMisileImgHud {
   
       gameBoxNode.append(this.node);
   
-      this.x = 350;
+      this.x = 250;
       this.y = 650;
       this.w = 
       this.h = 35

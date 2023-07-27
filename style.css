@@ -68,13 +68,15 @@ body {
 
 /* ------AUDIOS -----------*/
 
-#laserHero {
-  display: none;
+#score-box {
+  margin-top: 650px;
+  margin-left: 300px;
+  
+  
+}
 
+#score {
+  color: rgb(218, 235, 240);
+ 
 }
-#miniExplosion {
-  display: none;
-}
-#bigExplosion {
-  display: none;
-}
+

@@ -15,6 +15,7 @@ class SpaceShipHero {
     this.y = 525;
     this.w = 42;
     this.h = 71;
+   
 
     this.health = 3;
 
@@ -179,7 +180,7 @@ class SpaceShipHero {
       let heroFire = new FuegoSpaceShipHero(this.x);
 
       gameObject.heroFireArr.push(heroFire);
-    } else if (event === "f" && this.misileCount >= 10) {
+    } else if (event === "f" && this.misileCount >= 10 || event === "F" && this.misileCount >= 10) {
       let heroFireMisile = new FuegoSpaceShipMissile(this.x + 20);
       gameObject.heroFireMissil.push(heroFireMisile);
       this.misileCount = 0;
