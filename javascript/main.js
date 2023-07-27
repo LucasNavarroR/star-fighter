@@ -11,12 +11,15 @@ const playAgainGameOverButton = document.querySelector(
   "#playAgain-gamOver-btn");
 
   // VARIABLES DE AUDIO
-const laserHeroSoundNode = document.querySelector("#laserHero");
-const miniExplosionSoundNode = document.querySelector("#miniExplosion");
-const bigExplosionSoundNode = document.querySelector("#bigExplosion");
-const launchRocketSoundNode = document.querySelector("#rocket-launch")
-const hitHeroDamageSoundNode = document.querySelector("#hit-hero")
-const bsoGameSoundNode = document.querySelector("#bso-sound")
+const laserHeroSoundNode = new Audio(src= "./Animated_Pixel_Ships_v1.5.6/sounds/laser-gun-fire.mp3")
+const miniExplosionSoundNode = new Audio(src= "./Animated_Pixel_Ships_v1.5.6/sounds/mini-explosion.mp3")
+const bigExplosionSoundNode = new Audio(src= "./Animated_Pixel_Ships_v1.5.6/sounds/misil-explosion.mp3")
+const launchRocketSoundNode = new Audio(src= "./Animated_Pixel_Ships_v1.5.6/sounds/misil-launch.mp3")
+const hitHeroDamageSoundNode = new Audio(src= "./Animated_Pixel_Ships_v1.5.6/sounds/hero-get-hit.mp3")
+const bsoGameSoundNode = new Audio(src= "./Animated_Pixel_Ships_v1.5.6/sounds/bso-music.mp3")
+const weaponReadySoundNode = new Audio(src="./Animated_Pixel_Ships_v1.5.6/sounds/weapon-ready.mp3")
+const shieldReadySoundNode = new Audio(src="./Animated_Pixel_Ships_v1.5.6/sounds/shield-ready.mp3")
+const shieldActivatedSoundNode = new Audio(src="./Animated_Pixel_Ships_v1.5.6/sounds/shield-activated.mp3")
 
 laserHeroSoundNode.volume = 0.1
 miniExplosionSoundNode.volume = 0.1
@@ -24,8 +27,9 @@ bigExplosionSoundNode.volume = 0.1
 launchRocketSoundNode.volume = 0.1
 hitHeroDamageSoundNode.volume = 0.1
 bsoGameSoundNode.volume = 0.1
-
-
+weaponReadySoundNode.volume = 0.1
+shieldReadySoundNode.volume = 0.1
+shieldActivatedSoundNode.volume = 0.1
 let scoreNode = document.querySelector("#score")
 let gameObject = null;
 
@@ -46,7 +50,7 @@ function startGame() {
 
 //console.log(typeof gameBoxNode)
 function restartGame() {
-  gameBoxNode.innerHTML = " ";
+  gameBoxNode.innerHTML = `<h1 id="score-box">SCORE <span id="score"> 0</span></h1>`
   gameObject.bsoSOundVar = false;
 
  
@@ -83,7 +87,7 @@ window.addEventListener("keyup", (event) => {
   }  else if (event.key === "s" || event.key === "S") {
     
      gameObject.spaceShipHero.heroShield = false;
-     console.log(gameObject.spaceShipHero.heroShield)
+     //console.log(gameObject.spaceShipHero.heroShield)
      
 }}
 );

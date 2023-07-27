@@ -27,10 +27,13 @@ class SpaceShipHero {
     this.imgRight = false;
     this.imgForward = true;
 
+
+    this.shieldSound = false;
+
     this.heroShield = false;
     this.heroShieldImg = false;
     this.shieldCount = 0;
-
+this.misileSound = false;
     this.misileCount = 0;
 
     // propiedades de proyectiles
@@ -139,6 +142,11 @@ class SpaceShipHero {
 
     if (this.misileCount >= 10) {
       gameObject.MisileIcon.node.style.display = "flex";
+    if (this.misileSound === false) {
+      weaponReadySoundNode.play()
+      this.misileSound = true;
+    }
+     
     } else {
       gameObject.MisileIcon.node.style.display = "none";
     }
@@ -151,17 +159,24 @@ class SpaceShipHero {
       gameObject.shieldIcon.node.style.display = "none";
     } else {
       if (this.shieldCount >= 5) {
-        console.log("shield activated");
+       // console.log("shield activated");
+       
         gameObject.shieldIcon.node.style.display = "flex";
+        if(this.shieldSound === false) {
+        shieldReadySoundNode.play()
+        this.shieldSound = true
+      
+      }
 
         if (this.heroShield === true && gameObject.heroShieldArr.length === 0) {
+          
           
 
           let heroShield = new HeroShield(this.x);
           this.shieldCount = 0;
           gameObject.heroShieldArr.push(heroShield);
           gameObject.heroShieldArr[0].posicionShield(this.x);
-
+          
           setTimeout(() => {
             this.shieldCount = 0;
             this.heroShield = false;
@@ -170,6 +185,7 @@ class SpaceShipHero {
           }, 4000);
         }
       } else {
+        
         gameObject.shieldIcon.node.style.display = "none";
       }
     }

@@ -74,9 +74,10 @@ this.myScore = 0;
   HeroShieldAndMisileCount = () => {
     if (this.heroShieldArr.length === 1) {
       this.heroShieldArr[0].posicionShield(this.spaceShipHero.x);
+      shieldActivatedSoundNode.play()
     } 
 
-    if (this.frames % 240 === 0) {
+    if (this.frames % 130 === 0) {
       this.spaceShipHero.shieldCount++;
     } 
 
@@ -277,7 +278,7 @@ scoreNode.innerText = this.myScore
           miniExplosionSoundNode.play();
           this.heroFireArr.splice(a, 1);
           if (cadaAsteroide.explosion !== true) {this.myScore += 100;}
-          console.log("colision");
+          //console.log("colision");
         }
       });
     });
@@ -344,7 +345,7 @@ scoreNode.innerText = this.myScore
       
           this.villanFireArr[i].node.remove();
           this.villanFireArr.splice(i, 1);
-         // console.log("colison fuego escudo");
+          console.log("colison fuego escudo");
         }
       });
     };
@@ -525,7 +526,7 @@ scoreNode.innerText = this.myScore
   // funciones de mi juego
 
   gameLoop = () => {
-    console.log(this.myScore)
+  // console.log(this.myScore)
     //console.log(this.spaceShipHero.health);
     //console.log(this.spaceShipHero.shieldCount)
 

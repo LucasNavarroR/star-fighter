@@ -10,7 +10,7 @@ class HeroShield {
  
   gameBoxNode.append(this.node)
 
-  this.x = position;
+  this.x = position-30;
   this.y = 500;
   this.w = 120;
   this.h = 120;
@@ -28,7 +28,8 @@ class HeroShield {
 
 
   posicionShield = (position) => {
+    this.x = position -30
 
-    this.node.style.left =  `${position-30}px`;
+    this.node.style.left =  `${this.x}px`;
   };
 }
