@@ -43,8 +43,14 @@ this.myScore = 0;
     ];
     this.villanId = 0;
   }
-  // ------ BSO----
+  
     // ------ BSO----
+
+
+
+
+
+    
     bsoSound = () => {
       if(this.bsoSOundVar === false )
       bsoGameSoundNode.play()

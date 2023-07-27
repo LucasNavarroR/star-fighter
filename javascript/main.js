@@ -18,6 +18,14 @@ const launchRocketSoundNode = document.querySelector("#rocket-launch")
 const hitHeroDamageSoundNode = document.querySelector("#hit-hero")
 const bsoGameSoundNode = document.querySelector("#bso-sound")
 
+laserHeroSoundNode.volume = 0.1
+miniExplosionSoundNode.volume = 0.1
+bigExplosionSoundNode.volume = 0.1
+launchRocketSoundNode.volume = 0.1
+hitHeroDamageSoundNode.volume = 0.1
+bsoGameSoundNode.volume = 0.1
+
+
 let scoreNode = document.querySelector("#score")
 let gameObject = null;
 
