@@ -90,9 +90,10 @@ this.myScore = 0;
       //console.log("misil quieto");
 
       if (cadaMisil.y <= 100 && cadaMisil.explosionActive === false) {
-        cadaMisil.y = 100;
         cadaMisil.node.src =
           "./Animated_Pixel_Ships_v1.5.6/Explosion/Large/explosion-grande.gif";
+        cadaMisil.y = 100;
+        
         cadaMisil.x -= 118;
         cadaMisil.y -= 116;
         cadaMisil.w = 250;

@@ -5,7 +5,7 @@ class FuegoSpaceShipHero {
   constructor(position) {
 
   this.node = document.createElement("img")
-  this.node.src = "./Animated_Pixel_Ships_v1.5.6/Projectiles/laser_basico.png"
+  this.node.src = "./Animated_Pixel_Ships_v1.5.6/Projectiles/laser-basico.png"
 
  
   gameBoxNode.append(this.node)
