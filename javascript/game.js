@@ -248,8 +248,8 @@ class Game {
           cadaFuego.y + cadaFuego.h > cadaAsteroide.y
         ) {
           // Collision detected!
-          this.asteroidArr[b].health -= this.heroFireArr[a].damage;
-          this.heroFireArr[a].node.remove();
+          cadaAsteroide.health -= cadaFuego.damage;
+          cadaFuego.node.remove();
           miniExplosionSoundNode.play();
           this.heroFireArr.splice(a, 1);
           if (cadaAsteroide.explosion !== true) {
@@ -274,11 +274,11 @@ class Game {
         ) {
           // Collision detected!
 
-          this.villanArr[b].health -= this.heroFireArr[a].damage;
-          if (this.villanArr[b].health <= 0) {
+          cadaVillano.health -= cadaFuego.damage;
+          if (cadaVillano.health <= 0) {
             this.myScore += 1000;
           }
-          this.heroFireArr[a].node.remove();
+          cadaFuego.node.remove();
           this.heroFireArr.splice(a, 1);
           console.log("colision");
         }
@@ -297,9 +297,9 @@ class Game {
         ) {
           // Collision detected!
           if (cadaMisil.explosionActive === true) {
-            this.villanArr[b].health -= this.heroFireMissil[a].damage;
+            cadaVillano.health -= cadaMisil.damage;
             if (
-              this.villanArr[b].health <= 0 &&
+              cadaVillano.health <= 0 &&
               cadaVillano.explosion !== true
             ) {
               this.myScore += 1000;
@@ -322,9 +322,9 @@ class Game {
         ) {
           // Collision detected!
           if (cadaMisil.explosionActive === true) {
-            this.asteroidArr[b].health -= this.heroFireMissil[a].damage;
+            cadaAsteroid.health -= cadaMisil.damage;
             if (
-              this.asteroidArr[b].health <= 0 &&
+              cadaAsteroid.health <= 0 &&
               cadaAsteroid.explosion !== true
             ) {
               this.myScore += 100;
@@ -350,9 +350,8 @@ class Game {
             shield.y + shield.h > cadaAsteroide.y
           ) {
             // Collision detected!
-            this.asteroidArr[b].health -= this.heroShieldArr[a].damage;
-            this.asteroidArr[b].node.remove();
-            this.asteroidArr.splice(a, 1);
+            cadaAsteroide.health -= shield.damage;
+            
 
             //console.log("colision asteroid shield")
           }
@@ -371,11 +370,9 @@ class Game {
           this.heroShieldArr[0].y + this.heroShieldArr[0].h > cadaVillano.y
         ) {
           // Collision detected!
-          this.villanArr[i].health = 0;
+          cadaVillano.health = 0;
 
-          this.villanArr[i].node.remove();
-          this.villanArr.splice(i, 1);
-
+         
           console.log("colision villan shield");
         }
       });
@@ -436,11 +433,11 @@ class Game {
         asteroid.explosion = true;
         miniExplosionSoundNode.play();
         setTimeout(() => {
-          this.asteroidArr[i].node.remove();
+          asteroid.node.remove();
           this.asteroidArr.splice(i, 1);
         }, 700);
       } else if (asteroid.y > 732) {
-        this.asteroidArr[0].node.remove();
+        asteroid.node.remove();
         this.asteroidArr.shift();
       }
     });
@@ -449,14 +446,14 @@ class Game {
   laserDisapear = () => {
     this.heroFireArr.forEach((cadaFuego) => {
       if (cadaFuego.y <= -26) {
-        this.heroFireArr[0].node.remove();
+        cadaFuego.node.remove();
         this.heroFireArr.shift();
       }
     });
 
     this.villanFireArr.forEach((cadaFuego, i) => {
       if (cadaFuego.y >= 700) {
-        this.villanFireArr[0].node.remove();
+        cadaFuego.node.remove();
         this.villanFireArr.shift();
       } else if (
         this.villanArr.forEach((villan) => {
@@ -464,7 +461,7 @@ class Game {
         })
       ) {
         //console.log("entro");
-        this.villanFireArr[i].node.remove();
+        cadaFuego.node.remove();
         this.villanFireArr.splice(i, 1);
       }
     });
@@ -484,11 +481,11 @@ class Game {
         villan.explosion = true;
         miniExplosionSoundNode.play();
         setTimeout(() => {
-          this.villanArr[i].node.remove();
+          villan.node.remove();
           this.villanArr.splice(i, 1);
         }, 700);
       } else if (villan.y > 780) {
-        this.villanArr[i].node.remove();
+        villan.node.remove();
         this.villanArr.splice(i, 1);
       }
     });
