@@ -39,6 +39,9 @@ const shieldReadySoundNode = new Audio(
 const shieldActivatedSoundNode = new Audio(
   (src = "./Animated_Pixel_Ships_v1.5.6/sounds/shield-activated.mp3")
 );
+const gameOverSoundNode = new Audio(
+  (src = "./Animated_Pixel_Ships_v1.5.6/sounds/game-over.mp3")
+);
 
 laserHeroSoundNode.volume = 0.1;
 miniExplosionSoundNode.volume = 0.1;
@@ -49,6 +52,7 @@ bsoGameSoundNode.volume = 0.1;
 weaponReadySoundNode.volume = 0.1;
 shieldReadySoundNode.volume = 0.1;
 shieldActivatedSoundNode.volume = 0.1;
+gameOverSoundNode.volume = 0.1;
 
 let scoreNode = document.querySelector("#score");
 let gameObject = null;

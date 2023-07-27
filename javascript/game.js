@@ -124,6 +124,9 @@ class Game {
     this.isGameOn = false; //detiene la recursion
     gameScreenNOde.style.display = "none"; //quita la pantalla de juego
     gameOverScreenNode.style.display = "flex";
+    bsoGameSoundNode.pause();
+    gameOverSoundNode.play();
+
   };
 
  
@@ -211,6 +214,7 @@ class Game {
         this.villanArr.splice(i, 1);
 
         this.spaceShipHero.health -= 1;
+        hitHeroDamageSoundNode.play()
 
         //console.log("colison nave");
       }
