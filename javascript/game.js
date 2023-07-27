@@ -284,7 +284,7 @@ class Game {
           }
           cadaFuego.node.remove();
           this.heroFireArr.splice(a, 1);
-          console.log("colision");
+          //console.log("colision");
         }
       });
     });
@@ -377,7 +377,7 @@ class Game {
           cadaVillano.health = 0;
 
          
-          console.log("colision villan shield");
+          //console.log("colision villan shield");
         }
       });
     }
@@ -396,7 +396,7 @@ class Game {
 
           this.villanFireArr[i].node.remove();
           this.villanFireArr.splice(i, 1);
-          console.log("colison fuego escudo");
+          //console.log("colison fuego escudo");
         }
       });
     }

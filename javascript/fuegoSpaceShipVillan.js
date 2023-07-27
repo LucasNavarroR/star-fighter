@@ -1,4 +1,4 @@
-console.log("fuegoSpaceShipVillan.js");
+//console.log("fuegoSpaceShipVillan.js");
 
 class FuegoSpaceShipVillan {
   constructor(position, fire, direction, id) {

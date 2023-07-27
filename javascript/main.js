@@ -60,7 +60,7 @@ let gameObject = null;
 // STATE MANAGEMENT FUNCTIONS--------------------------------------------------
 
 function startGame() {
-  console.log("game started");
+  //console.log("game started");
 
   gameOverScreenNode.style.display = "none";
   startScreenNode.style.display = "none";
