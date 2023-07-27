@@ -15,7 +15,6 @@ class SpaceShipHero {
     this.y = 525;
     this.w = 42;
     this.h = 71;
-   
 
     this.health = 3;
 
@@ -27,13 +26,12 @@ class SpaceShipHero {
     this.imgRight = false;
     this.imgForward = true;
 
-
     this.shieldSound = false;
 
     this.heroShield = false;
     this.heroShieldImg = false;
     this.shieldCount = 0;
-this.misileSound = false;
+    this.misileSound = false;
     this.misileCount = 0;
 
     // propiedades de proyectiles
@@ -95,12 +93,12 @@ this.misileSound = false;
     if (this.movingLeft === true && this.imgLeft === false) {
       this.node.src =
         "./Animated_Pixel_Ships_v1.5.6/Plane 01/Normal/Hero-left.gif";
-        this.h = 71;
+      this.h = 71;
       this.imgLeft = true;
     } else if (this.movingRight === true && this.imgRight === false) {
       this.node.src =
         "./Animated_Pixel_Ships_v1.5.6/Plane 01/Normal/Hero-right.gif";
-        this.h = 71;
+      this.h = 71;
       this.imgRight = true;
     }
     // else   {
@@ -133,59 +131,53 @@ this.misileSound = false;
     this.node.style.left = `${this.x}px`;
   };
 
-
   heroMisileIcon = () => {
     if (gameObject.MisileIcon === null) {
       gameObject.MisileIcon = new HeroMisileImgHud();
       gameObject.MisileIcon.node.style.display = "none";
-  } else {
-
-    if (this.misileCount >= 10) {
-      gameObject.MisileIcon.node.style.display = "flex";
-    if (this.misileSound === false) {
-      weaponReadySoundNode.play()
-      this.misileSound = true;
-    }
-     
     } else {
-      gameObject.MisileIcon.node.style.display = "none";
+      if (this.misileCount >= 10) {
+        gameObject.MisileIcon.node.style.display = "flex";
+        if (this.misileSound === false) {
+          weaponReadySoundNode.play();
+          this.misileSound = true;
+        }
+      } else {
+        gameObject.MisileIcon.node.style.display = "none";
+        this.misileSound = false;
+      }
     }
-  }
-}
-  
+  };
+
   spaceShipHeroShield = () => {
     if (gameObject.shieldIcon === null) {
       gameObject.shieldIcon = new HeroShieldImgHud();
       gameObject.shieldIcon.node.style.display = "none";
     } else {
       if (this.shieldCount >= 5) {
-       // console.log("shield activated");
-       
+        // console.log("shield activated");
+
         gameObject.shieldIcon.node.style.display = "flex";
-        if(this.shieldSound === false) {
-        shieldReadySoundNode.play()
-        this.shieldSound = true
-      
-      }
+        if (this.shieldSound === false) {
+          shieldReadySoundNode.play();
+          this.shieldSound = true;
+        }
 
         if (this.heroShield === true && gameObject.heroShieldArr.length === 0) {
-          
-          
-
           let heroShield = new HeroShield(this.x);
           this.shieldCount = 0;
           gameObject.heroShieldArr.push(heroShield);
           gameObject.heroShieldArr[0].posicionShield(this.x);
-          
+
           setTimeout(() => {
             this.shieldCount = 0;
             this.heroShield = false;
+            this.shieldSound = false;
             gameObject.heroShieldArr[0].node.remove();
             gameObject.heroShieldArr.shift();
           }, 4000);
         }
       } else {
-        
         gameObject.shieldIcon.node.style.display = "none";
       }
     }
@@ -196,7 +188,10 @@ this.misileSound = false;
       let heroFire = new FuegoSpaceShipHero(this.x);
 
       gameObject.heroFireArr.push(heroFire);
-    } else if (event === "f" && this.misileCount >= 10 || event === "F" && this.misileCount >= 10) {
+    } else if (
+      (event === "f" && this.misileCount >= 10) ||
+      (event === "F" && this.misileCount >= 10)
+    ) {
       let heroFireMisile = new FuegoSpaceShipMissile(this.x + 20);
       gameObject.heroFireMissil.push(heroFireMisile);
       this.misileCount = 0;

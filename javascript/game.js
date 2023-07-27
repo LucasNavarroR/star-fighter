@@ -2,24 +2,36 @@
 
 class Game {
   constructor() {
-    //aqui estaran todas los objetos de mi juego
+    //---------------------OBJETOS -------------------------
+    this.frames = 0;
+
+    this.isGameOn = true; // ON-OFF
+
+    this.bsoSOundVar = false; // banda sonora control
+
+    this.planetArr = [];
+    //---------------MAIN CHARACTER---------------------
 
     this.spaceShipHero = new SpaceShipHero();
-    this.heroHealthCount = null,
-    this.shieldIcon = null;
-this.MisileIcon = null;
-this.bsoSOundVar = false
-this.myScore = 0;
+
+    (this.heroHealthCount = null), (this.shieldIcon = null);
+
+    this.myScore = 0;
+
+    this.heroShieldArr = [];
+    this.MisileIcon = null;
+
+    this.heroFireMissil = [];
+    this.heroFireArr = [];
+
+    // -------------------PROYECTILES ENEMIGOS----------------
+
+    this.villanFireArr = [];
+
+    //----------------- ENEMIGOS-------------------
 
     this.asteroidArr = [];
     this.villanArr = [];
-    this.isGameOn = true;
-    this.planetArr = [];
-    this.frames = 0;
-    this.heroFireMissil = [];
-    this.villanFireArr = [];
-    this.heroFireArr = [];
-    this.heroShieldArr = [];
 
     this.villanModelArr = [
       {
@@ -43,29 +55,20 @@ this.myScore = 0;
     ];
     this.villanId = 0;
   }
-  
-    // ------ BSO----
 
+  // ------ BSO------
 
-
-
-
-    
-    bsoSound = () => {
-      if(this.bsoSOundVar === false )
-      bsoGameSoundNode.play()
-      this.bsoSOundVar = true
-      setTimeout (()=> {
-        this.bsoSOundVar = false
-      },17000)
-    }
-  
+  bsoSound = () => {
+    if (this.bsoSOundVar === false) bsoGameSoundNode.play();
+    this.bsoSOundVar = true;
+    setTimeout(() => {
+      this.bsoSOundVar = false;
+    }, 17000);
+  };
 
   //------------------------------FUNCIONES HERO-----------------------------------
 
   HeroHealth = () => {
-
-   
     if (this.spaceShipHero.health < 1) {
       this.gameOver();
     }
@@ -74,15 +77,15 @@ this.myScore = 0;
   HeroShieldAndMisileCount = () => {
     if (this.heroShieldArr.length === 1) {
       this.heroShieldArr[0].posicionShield(this.spaceShipHero.x);
-      shieldActivatedSoundNode.play()
-    } 
+      shieldActivatedSoundNode.play();
+    }
 
     if (this.frames % 130 === 0) {
       this.spaceShipHero.shieldCount++;
-    } 
+    }
 
     if (this.frames % 120 === 0) {
-      this.spaceShipHero.misileCount ++;
+      this.spaceShipHero.misileCount++;
     }
   };
 
@@ -94,14 +97,14 @@ this.myScore = 0;
         cadaMisil.node.src =
           "./Animated_Pixel_Ships_v1.5.6/Explosion/Large/explosion-grande.gif";
         cadaMisil.y = 100;
-        
+
         cadaMisil.x -= 118;
         cadaMisil.y -= 116;
         cadaMisil.w = 250;
         cadaMisil.h = 250;
         cadaMisil.explosionActive = true;
 
-bigExplosionSoundNode.play()
+        bigExplosionSoundNode.play();
         setTimeout(() => {
           this.heroFireMissil[i].node.remove();
           this.heroFireMissil.splice(i, 1);
@@ -114,41 +117,7 @@ bigExplosionSoundNode.play()
     });
   };
 
-  // heroMovement = () => {
-  //   document.addEventListener("keydown", (event) => {
-  //     this.spaceShipHero.keyPress = true;
-  //     console.log("kedydown");
-  //     if (
-  //       event.key === "ArrowLeft" &&
-  //       this.spaceShipHero.x > 0 &&
-  //       this.isGameOn === true &&
-  //       this.spaceShipHero.keyPress === true
-  //     ) {
-  //       this.spaceShipHero.keyPress = true;
-  //       // this.node.src = "./Animated_Pixel_Ships_v1.5.6/Plane 01/Normal/Hero-sip-izquierda.png"
-  //       this.spaceShipHero.x -= 20;
-  //       this.spaceShipHero.positionUpdate();
-  //     } else if (
-  //       event.key === "ArrowRight" &&
-  //       this.spaceShipHero.x < 458 &&
-  //       this.isGameOn === true &&
-  //       this.spaceShipHero.keyPress === true
-  //     ) {
-  //       this.spaceShipHero.x += 20;
-  //       this.spaceShipHero.positionUpdate();
-  //     } else if (event.key === " ") {
-  //       this.spaceShipHero.spaceShipHeroFire();
-  //     }
-  //   });
-
-  //   document.addEventListener("keyup", (event) => {
-  //     console.log("keyup");
-  //     if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
-  //       this.spaceShipHero.keyPress = false;
-  //     }
-  //   });
-  // };
-
+ 
   //-------------------------------------------CONDICIONALES DE PARTIDA-------------------------
 
   gameOver = () => {
@@ -157,11 +126,7 @@ bigExplosionSoundNode.play()
     gameOverScreenNode.style.display = "flex";
   };
 
-  score = () => {
-
-scoreNode.innerText = this.myScore
-
-  }
+ 
   winTheGame = () => {
     if (this.frames === 7200) {
       let planet = new PlanetDestiny();
@@ -177,7 +142,12 @@ scoreNode.innerText = this.myScore
     }
   };
 
+  score = () => {
+    scoreNode.innerText = this.myScore;
+  };
+
   //--------------------------------------CREACION DE OBJETOS--------------------------------------
+
   spaceShipVillanApeaar = () => {
     if (this.frames > 600 && this.frames % 360 === 0) {
       let randomPositionX = Math.floor(Math.random() * 450);
@@ -220,7 +190,10 @@ scoreNode.innerText = this.myScore
     }
   };
 
+
   // ------------------------COLISIONES----------------------------------------
+
+
 
   collisionSpaceShipHerospaceShipVillan = () => {
     //el pollito => this.pollito
@@ -238,7 +211,7 @@ scoreNode.innerText = this.myScore
         this.villanArr.splice(i, 1);
 
         this.spaceShipHero.health -= 1;
-        
+
         //console.log("colison nave");
       }
     });
@@ -258,11 +231,13 @@ scoreNode.innerText = this.myScore
         this.asteroidArr[i].node.remove();
         this.asteroidArr.splice(i, 1);
         this.spaceShipHero.health -= 1;
-        hitHeroDamageSoundNode.play()
+        hitHeroDamageSoundNode.play();
       }
     });
   };
 
+
+  //------------------COLISIONES DE FUEGO HERO VS --------------------
   collisionSpaceShipHeroFireAsteroids = () => {
     this.heroFireArr.forEach((cadaFuego, a) => {
       this.asteroidArr.forEach((cadaAsteroide, b) => {
@@ -277,79 +252,16 @@ scoreNode.innerText = this.myScore
           this.heroFireArr[a].node.remove();
           miniExplosionSoundNode.play();
           this.heroFireArr.splice(a, 1);
-          if (cadaAsteroide.explosion !== true) {this.myScore += 100;}
+          if (cadaAsteroide.explosion !== true) {
+            this.myScore += 100;
+          }
           //console.log("colision");
         }
       });
     });
   };
 
-  collisionShieldAsteroids = () => {
-    if (this.heroShieldArr.length === 1) {
-      this.heroShieldArr.forEach((shield, a) => {
-        this.asteroidArr.forEach((cadaAsteroide, b) => {
-          if (
-            shield.x < cadaAsteroide.x + cadaAsteroide.w &&
-            shield.x + shield.w > cadaAsteroide.x &&
-            shield.y < cadaAsteroide.y + cadaAsteroide.h &&
-            shield.y + shield.h > cadaAsteroide.y
-          ) {
-            // Collision detected!
-            this.asteroidArr[b].health -= this.heroShieldArr[a].damage;
-            this.asteroidArr[b].node.remove();
-          this.asteroidArr.splice(a, 1);
-            
-            //console.log("colision asteroid shield")
-          }
-        });
-      });
-    }
-  };
 
-  collisionShieldVillan = () => {
-   
-    if (this.heroShieldArr.length === 1) {
-      this.villanArr.forEach((cadaVillano, i) => {
-        if (
-          this.heroShieldArr[0].x < cadaVillano.x + cadaVillano.w &&
-          this.heroShieldArr[0].x + this.heroShieldArr[0].w > cadaVillano.x &&
-          this.heroShieldArr[0].y < cadaVillano.y + cadaVillano.h &&
-          this.heroShieldArr[0].y + this.heroShieldArr[0].h > cadaVillano.y
-        ) {
-          // Collision detected!
-          this.villanArr[i].health = 0;
-
-          this.villanArr[i].node.remove();
-          this.villanArr.splice(i, 1);
-          
-          console.log("colision villan shield")
-        }
-      });
-    }
-  };
-
-
-  collisionShieldFireVillan = () => {
-   
-
-    if (this.heroShieldArr.length === 1) {
-      this.villanFireArr.forEach((cadaFuego, i) => {
-        if (
-          this.heroShieldArr[0].x < cadaFuego.x + cadaFuego.w &&
-          this.heroShieldArr[0].x + this.heroShieldArr[0].w > cadaFuego.x &&
-          this.heroShieldArr[0].y < cadaFuego.y + cadaFuego.h &&
-          this.heroShieldArr[0].y + this.heroShieldArr[0].h > cadaFuego.y
-        ) {
-          // Collision detected!
-  
-      
-          this.villanFireArr[i].node.remove();
-          this.villanFireArr.splice(i, 1);
-          console.log("colison fuego escudo");
-        }
-      });
-    };
-  };
 
   collisionSpaceShipHeroFireVillanos = () => {
     this.heroFireArr.forEach((cadaFuego, a) => {
@@ -363,7 +275,9 @@ scoreNode.innerText = this.myScore
           // Collision detected!
 
           this.villanArr[b].health -= this.heroFireArr[a].damage;
-          if (this.villanArr[b].health <= 0) { this.myScore += 1000}
+          if (this.villanArr[b].health <= 0) {
+            this.myScore += 1000;
+          }
           this.heroFireArr[a].node.remove();
           this.heroFireArr.splice(a, 1);
           console.log("colision");
@@ -384,7 +298,12 @@ scoreNode.innerText = this.myScore
           // Collision detected!
           if (cadaMisil.explosionActive === true) {
             this.villanArr[b].health -= this.heroFireMissil[a].damage;
-            if( this.villanArr[b].health <= 0 && cadaVillano.explosion !== true ) { this.myScore += 1000}
+            if (
+              this.villanArr[b].health <= 0 &&
+              cadaVillano.explosion !== true
+            ) {
+              this.myScore += 1000;
+            }
           } else {
           }
         }
@@ -404,7 +323,12 @@ scoreNode.innerText = this.myScore
           // Collision detected!
           if (cadaMisil.explosionActive === true) {
             this.asteroidArr[b].health -= this.heroFireMissil[a].damage;
-            if( this.asteroidArr[b].health <= 0 && cadaAsteroid.explosion !== true) { this.myScore += 100}
+            if (
+              this.asteroidArr[b].health <= 0 &&
+              cadaAsteroid.explosion !== true
+            ) {
+              this.myScore += 100;
+            }
           } else {
           }
         }
@@ -412,8 +336,75 @@ scoreNode.innerText = this.myScore
     });
   };
 
+  //------------------- COLISIONES DEL SHIELD HERO ----------------------
+
+
+  collisionShieldAsteroids = () => {
+    if (this.heroShieldArr.length === 1) {
+      this.heroShieldArr.forEach((shield, a) => {
+        this.asteroidArr.forEach((cadaAsteroide, b) => {
+          if (
+            shield.x < cadaAsteroide.x + cadaAsteroide.w &&
+            shield.x + shield.w > cadaAsteroide.x &&
+            shield.y < cadaAsteroide.y + cadaAsteroide.h &&
+            shield.y + shield.h > cadaAsteroide.y
+          ) {
+            // Collision detected!
+            this.asteroidArr[b].health -= this.heroShieldArr[a].damage;
+            this.asteroidArr[b].node.remove();
+            this.asteroidArr.splice(a, 1);
+
+            //console.log("colision asteroid shield")
+          }
+        });
+      });
+    }
+  };
+
+  collisionShieldVillan = () => {
+    if (this.heroShieldArr.length === 1) {
+      this.villanArr.forEach((cadaVillano, i) => {
+        if (
+          this.heroShieldArr[0].x < cadaVillano.x + cadaVillano.w &&
+          this.heroShieldArr[0].x + this.heroShieldArr[0].w > cadaVillano.x &&
+          this.heroShieldArr[0].y < cadaVillano.y + cadaVillano.h &&
+          this.heroShieldArr[0].y + this.heroShieldArr[0].h > cadaVillano.y
+        ) {
+          // Collision detected!
+          this.villanArr[i].health = 0;
+
+          this.villanArr[i].node.remove();
+          this.villanArr.splice(i, 1);
+
+          console.log("colision villan shield");
+        }
+      });
+    }
+  };
+
+  collisionShieldFireVillan = () => {
+    if (this.heroShieldArr.length === 1) {
+      this.villanFireArr.forEach((cadaFuego, i) => {
+        if (
+          this.heroShieldArr[0].x < cadaFuego.x + cadaFuego.w &&
+          this.heroShieldArr[0].x + this.heroShieldArr[0].w > cadaFuego.x &&
+          this.heroShieldArr[0].y < cadaFuego.y + cadaFuego.h &&
+          this.heroShieldArr[0].y + this.heroShieldArr[0].h > cadaFuego.y
+        ) {
+          // Collision detected!
+
+          this.villanFireArr[i].node.remove();
+          this.villanFireArr.splice(i, 1);
+          console.log("colison fuego escudo");
+        }
+      });
+    }
+  };
+
+
+ // ------------------- COLISIONES DE FIRE ENEMIGO VS HERO ---------------------------------
+
   collisionSpaceShipVillanFireHeroShip = () => {
-   
     this.villanFireArr.forEach((cadaFuego, i) => {
       if (
         this.spaceShipHero.x < cadaFuego.x + cadaFuego.w &&
@@ -424,17 +415,18 @@ scoreNode.innerText = this.myScore
         // Collision detected!
 
         this.spaceShipHero.health -= cadaFuego.damage;
-        hitHeroDamageSoundNode.play()
+        hitHeroDamageSoundNode.play();
         this.villanFireArr[i].node.remove();
         this.villanFireArr.splice(i, 1);
         //console.log("colison");
       }
     });
   };
-  // --------------------------------------------ELIMINACION DE OBJETOS-----------------------------------------
-  asteroidDisapear = () => {
-    // si el primer elemento del array ha salido de la vista removemos el primer elemento del array
 
+  // --------------------------------------------ELIMINACION DE OBJETOS-----------------------------------------
+
+  asteroidDisapear = () => {
+    
     this.asteroidArr.forEach((asteroid, i) => {
       if (asteroid.explosion === false && asteroid.health <= 0) {
         //console.log("explosion");
@@ -478,31 +470,10 @@ scoreNode.innerText = this.myScore
     });
   };
 
-  // cleaningAsteroids = () => {
-  //   this.asteroidArr.forEach((asteroid, i) => {
-  //     if (asteroid.health <= 0) {
-  //       let explosion = asteroid.node.altimg;
-  //       gameBoxNode.append(explosion);
-
-  //       setTimeout(()=> {
-  //         explosion.remove();
-
-  //       },1000)
-
-  //       gameBoxNode.append(explosion);
-  //       console.log(explosion)
-
-  //       this.asteroidArr[i].node.remove();
-  //       this.asteroidArr.splice(i, 1);
-  //     }
-  //   });
-  // };
+  
 
   spaceShipVillanDisapear = () => {
-    // if (this.villanArr.length > 0 && this.villanArr[0].y > 769) {
-    //   this.villanArr[0].node.remove();
-    //   this.villanArr.shift();
-    // }
+   
 
     this.villanArr.forEach((villan, i) => {
       if (villan.explosion === false && villan.health < 1) {
@@ -526,7 +497,7 @@ scoreNode.innerText = this.myScore
   // funciones de mi juego
 
   gameLoop = () => {
-  // console.log(this.myScore)
+    // console.log(this.myScore)
     //console.log(this.spaceShipHero.health);
     //console.log(this.spaceShipHero.shieldCount)
 
@@ -535,11 +506,13 @@ scoreNode.innerText = this.myScore
     this.asteroidApear();
     this.asteroidDisapear();
     //this.cleaningAsteroids();
+
     // ----------------- ELIMINACION OBJETOS--------------------
     this.laserDisapear();
 
     this.spaceShipVillanApeaar();
     this.spaceShipVillanDisapear();
+
     //----------------- MOVIMIENTO--------------------------------
 
     // this.heroMovement();
@@ -567,13 +540,11 @@ scoreNode.innerText = this.myScore
     });
 
     // ------------------ colisiones -----------------------------
-    this.collisionShieldVillan()
-    this.collisionShieldAsteroids()
-    this.collisionShieldFireVillan()
 
+    this.collisionShieldVillan();
+    this.collisionShieldAsteroids();
+    this.collisionShieldFireVillan();
 
-    
-    
     this.collisionSpaceShipHeroFireAsteroids();
     this.collisionSpaceShipHeroFireVillanos();
     this.collisionSpaceShipVillanFireHeroShip();
@@ -582,21 +553,24 @@ scoreNode.innerText = this.myScore
 
     this.collisionSpaceShipHeroAsteroids();
     this.collisionSpaceShipHerospaceShipVillan();
-    
-    // ----------- OTROS----------
-    this.bsoSound()
-this.score()
 
     this.MisileExplosion();
-   this.spaceShipHero.HeroimgControl()
+
+    // ----------- OTROS----------
+    this.bsoSound();
+    this.score();
+
+    
+    this.spaceShipHero.HeroimgControl();
 
     this.HeroShieldAndMisileCount();
-    this.spaceShipHero.heroMisileIcon()
+
+    this.spaceShipHero.heroMisileIcon();
     this.spaceShipHero.spaceShipHeroShield();
-    this.spaceShipHero.spaceShipHeroHealth()
+    this.spaceShipHero.spaceShipHeroHealth();
     this.HeroHealth();
-   
-    this.heroHealthCount.actualizacionVidas()
+
+    this.heroHealthCount.actualizacionVidas();
     this.winTheGame();
 
     if (this.isGameOn === true) {
