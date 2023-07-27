@@ -1,4 +1,4 @@
-console.log("fueoMissilHero.js");
+
 
 class FuegoSpaceShipMissile {
 
