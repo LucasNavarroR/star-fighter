@@ -28,9 +28,13 @@ The game ends when you reach the base or when you die.
 
 ## Backlog Functionalities
 
-- Adding different characters with diferent propertys of live and damage.
+- Adding different characters with diferent properties of live and damage.
 - Add a final boss.
 - Add damage boosters.
+- Add new dificulty levels.
+- Add new villain types.
+- Add new difficulty levels.
+
 
 ## Technologies Used
 
