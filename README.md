@@ -2,7 +2,7 @@
 
 [Play the Game!](https://lucasnavarror.github.io/star-fighter/)
 
-(/Animated_Pixel_Ships_v1.5.6/base/Pantalla-Inicio.jpg)
+!(Animated_Pixel_Ships_v1.5.6/base/Star-fighter-logo.png)
 
 ## Description
 
