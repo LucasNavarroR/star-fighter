@@ -2,7 +2,7 @@
 
 [Play the Game!](https://lucasnavarror.github.io/star-fighter/)
 
-!(Animated_Pixel_Ships_v1.5.6/base/Star-fighter-logo.png)
+![](/Animated_Pixel_Ships_v1.5.6/base/Star-fighter-logo.png)
 
 ## Description
 
@@ -56,6 +56,9 @@ The game ends when you reach the base or when you die.
 
 ## Extra Links
 
+### Slides
+
+https://docs.google.com/presentation/d/1UtNV7rjnbaGi8z53ZJOXqE45WJ75gf9MOevAGcPStVg/edit?usp=sharing
 
 ### Deploy
 
