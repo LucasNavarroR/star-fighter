@@ -1,4 +1,4 @@
-console.log("asteroids.js");
+//console.log("asteroids.js");
 
 class Asteroid {
   constructor(randomPositionX) {
